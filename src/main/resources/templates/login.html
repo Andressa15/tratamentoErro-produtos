@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+    <h3 th:text="${mensagem}"></h3>
+		<form method="POST">
+			<p>Apelido: <input type="text" name="apelido"> </p>
+			<p>Senha: <input type="text" name="senha"> </p>
+			<button type="submit">Realizar Login</button>
+			
+		</form>
+		<form action="/sair" method="POST">
+			<button type="submit">Sair</button>
+		</form>       
+    </div>
+</body>
+</html>

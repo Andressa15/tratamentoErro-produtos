@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+	<div th:each="mensagem : ${mensagens}">
+		<p th:text="'*'+${mensagem}"></p>
+	</div>
+	<div>
+		<form method="POST">
+		<p>Nome da Categoria: <input type="text" name="nome"></p>
+		<button type="submit">Cadastrar Categoria</button>
+		</form>
+	</div>
+</body>
+</html>

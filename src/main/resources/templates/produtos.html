@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <ul>
+            <li><a href="/cadastrar/produtos">Cadastrar Produtos</a></li>
+        </ul>
+    </div>
+    <div th:each="produto : ${produtos} " style="border-style: dotted dashed solid double;">
+        <h5 th:text="${produto.nome}"></h5>
+        <p th:text="${produto.valor}"></p>
+        <p th:text="${produto.validade}"></p>
+        <h6>Categorias</h6>
+        <ul>
+        	<li th:each="categoria : ${produto.categorias}" th:text="${categoria.nome}"></li>
+        </ul>
+       
+    </div>
+</body>
+</html>
