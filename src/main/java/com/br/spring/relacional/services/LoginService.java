@@ -1,8 +1,11 @@
 package com.br.spring.relacional.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.br.spring.relacional.exceptions.LoginNaoEncontradoException;
 import com.br.spring.relacional.models.Login;
 import com.br.spring.relacional.models.Usuario;
 import com.br.spring.relacional.repositories.LoginRepository;
@@ -29,8 +32,17 @@ public class LoginService {
 		loginRepo.save(login);		
 	}
 	
-	public void upadate(Login login) {
+	public void upadate(int id, Login login) {
+		Optional<Login> optionalLogin = loginRepo.findById(id);
+		if(!optionalLogin.isPresent()) {
+			throw new LoginNaoEncontradoException("Não há login com esse id");
+		}
+		login.setId(id);
 		loginRepo.save(login);
+	}
+	
+	public void apagarLogin(int id) {
+		loginRepo.deleteById(id);
 	}
 	
 	public Login buscarPorApelidoESenha(Login login) {

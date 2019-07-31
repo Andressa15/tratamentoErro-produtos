@@ -12,9 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,31 +63,20 @@ public class LoginController {
 		}
 	}
 
-//	@PostMapping("/cadastro/login")
-//	public ModelAndView cadastrarLogin(@Valid Usuario user, BindingResult bindingUser, @Valid Login login,
-//			BindingResult bindingLogin) {
-//		ModelAndView mv = new ModelAndView("cadastro.html");
-//		if (bindingUser.hasErrors() || bindingLogin.hasErrors()) {
-//			List<String> msgs = new ArrayList<String>();
-//			for (ObjectError objerro : bindingUser.getAllErrors()) {
-//				msgs.add(objerro.getDefaultMessage());
-//			}
-//			for (ObjectError objerro : bindingLogin.getAllErrors()) {
-//				msgs.add(objerro.getDefaultMessage());
-//			}
-//			mv.addObject("msgs", msgs);
-//		} else {
-//			mv.addObject("msgs", loginserv.cadastrarLogin(user, login));
-//
-//		}
-//
-//		return mv;
-//	}
+	@PutMapping("/{id}")
+	public ResponseEntity<?> atualizarLogin(@PathVariable int id, @Valid @RequestBody Login login) {
+		loginserv.upadate(id, login);
+		return ResponseEntity.ok(login);
+	}
 	
-	@PostMapping("/sair")
-	public ModelAndView sair(HttpSession session) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/login");
-		session.removeAttribute("usuario");
-		return modelAndView;
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> apagarLogin(@PathVariable int id) {
+		try {
+			loginserv.apagarLogin(id);
+			return ResponseEntity.ok().build();
+		}
+		catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 }
